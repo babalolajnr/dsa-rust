@@ -16,19 +16,16 @@
     4. For each iteration, indexing starts from the first unsorted element.
        Step 1 to 3 are repeated until all the elements are placed at their correct positions.
 */
-pub fn selection_sort(arr: &mut [isize]) -> Vec<isize> {
-    for step in 0..arr.len() {
-        let mut min_idx = step;
-        for i in step + 1..arr.len() {
+pub fn selection_sort<T: Ord + Clone>(arr: &mut [T]) -> Vec<T> {
+    for left in 0..arr.len() {
+        let mut min_idx = left;
+        for right in (left + 1)..arr.len() {
             //Select the minimum element in the loop
-            if arr[i] < arr[min_idx] {
-                min_idx = i;
+            if arr[right] < arr[min_idx] {
+                min_idx = right;
             }
         }
-
-        let temp = arr[step];
-        arr[step] = arr[min_idx];
-        arr[min_idx] = temp;
+        arr.swap(min_idx, left);
     }
     arr.to_owned()
 }
