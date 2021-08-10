@@ -31,13 +31,11 @@ pub mod bubble_sort {
 
     Space Complexity O(1)
     */
-    pub fn bubble_sort(arr: &mut [isize]) -> Vec<isize> {
+    pub fn bubble_sort<T: Ord + Clone>(arr: &mut [T]) -> Vec<T> {
         for i in 0..arr.len() {
             for j in 0..arr.len() - i - 1 {
                 if arr[j] > arr[j + 1] {
-                    let temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+                    arr.swap(j, j + 1);
                 }
             }
         }
@@ -54,15 +52,13 @@ pub mod bubble_sort {
 
     Space Complexity O(1)
     */
-    pub fn optimized_bubble_sort(arr: &mut [isize]) -> Vec<isize> {
+    pub fn optimized_bubble_sort<T: Ord + Clone>(arr: &mut [T]) -> Vec<T> {
         for i in 0..arr.len() {
             // Check if swapping occurs
             let mut swapped = false;
             for j in 0..arr.len() - i - 1 {
                 if arr[j] > arr[j + 1] {
-                    let temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
+                    arr.swap(j, j + 1);
                     swapped = true;
                 }
             }
@@ -92,5 +88,25 @@ mod tests {
         let sorted_arr = bubble_sort::optimized_bubble_sort(&mut arr);
         arr.sort();
         assert_eq!(arr, sorted_arr);
+    }
+
+    #[test]
+    fn descending() {
+        //descending
+        let mut ve1 = vec![6, 5, 4, 3, 2, 1];
+        bubble_sort::bubble_sort(&mut ve1);
+        for i in 0..ve1.len() - 1 {
+            assert!(ve1[i] <= ve1[i + 1]);
+        }
+    }
+
+    #[test]
+    fn ascending() {
+        //pre-sorted
+        let mut ve2 = vec![1, 2, 3, 4, 5, 6];
+        bubble_sort::bubble_sort(&mut ve2);
+        for i in 0..ve2.len() - 1 {
+            assert!(ve2[i] <= ve2[i + 1]);
+        }
     }
 }
