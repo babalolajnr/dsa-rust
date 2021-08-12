@@ -1,5 +1,8 @@
+/**
+Insertion sort is a sorting algorithm that places an unsorted element
+at its suitable place in each iteration.
+*/
 pub fn insertion_sort<T: PartialEq + PartialOrd + Clone>(arr: &mut [T]) -> Vec<T> {
-
     // The resulting vector should contain the same amount of elements as
     // the slice that is being sorted, so enough room is preallocated
     let mut result: Vec<T> = Vec::with_capacity(arr.len());
